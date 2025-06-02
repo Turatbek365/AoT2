@@ -171,5 +171,26 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
-</body>
+</body><audio id="bgm" loop preload="auto">
+  <source src="dota-2-main-menu-flute-theme.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const bgm = document.getElementById('bgm');
+
+  window.addEventListener('load', () => {
+    bgm.volume = 0.5;
+    bgm.play().catch(() => {
+      const enableMusic = () => {
+        bgm.play();
+        document.removeEventListener('click', enableMusic);
+        document.removeEventListener('touchstart', enableMusic);
+        document.removeEventListener('keydown', enableMusic);
+      };
+      document.addEventListener('click', enableMusic);
+      document.addEventListener('touchstart', enableMusic);
+      document.addEventListener('keydown', enableMusic);
+    });
+  });
+</script>
 </html>
